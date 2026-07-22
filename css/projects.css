@@ -1,0 +1,408 @@
+/* ===== PROJECTS PAGE STYLES ===== */
+
+.projects-section {
+    min-height: calc(100vh - 140px);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0f1f0f 100%);
+    padding: 4rem 5%;
+}
+
+.projects-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projects-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.projects-header .page-title {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+/* Project Card */
+.project-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(74, 222, 128, 0.15);
+}
+
+/* ========================================= */
+/* VIDEO COMPONENT STYLES                    */
+/* ========================================= */
+
+.project-video {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, #1a2f1a 100%);
+}
+
+.project-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+.project-card:hover .project-preview {
+    transform: scale(1.05);
+}
+
+/* Project Overlay */
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 10, 0.4) 0%,
+        rgba(10, 10, 10, 0.85) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    opacity: 0;
+    transition: opacity 400ms ease;
+    padding: 1.5rem;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+/* Watch Demo Button */
+.watch-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: 50px;
+    background-color: var(--accent);
+    color: var(--bg-primary);
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                background-color 300ms ease,
+                box-shadow 300ms ease;
+    transform: translateY(20px);
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.project-card:hover .watch-demo {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.watch-demo:hover {
+    background-color: var(--text-primary);
+    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+    transform: scale(1.05);
+}
+
+.watch-demo:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.play-icon {
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+/* Project Link Buttons */
+.project-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background-color 300ms ease,
+                transform 300ms ease,
+                color 300ms ease;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.project-link:hover {
+    background-color: rgba(74, 222, 128, 0.2);
+    color: var(--accent);
+    transform: scale(1.05);
+}
+
+.project-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* ========================================= */
+/* VIDEO MODAL STYLES                        */
+/* ========================================= */
+
+.video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 400ms ease, visibility 400ms ease;
+}
+
+.video-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 90vw;
+    max-width: 900px;
+    background: var(--bg-card);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+.video-modal.active .video-modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.video-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 300ms ease,
+                transform 300ms ease,
+                color 300ms ease;
+    backdrop-filter: blur(4px);
+}
+
+.video-close:hover {
+    background: rgba(74, 222, 128, 0.2);
+    color: var(--accent);
+    transform: scale(1.1);
+}
+
+.video-close:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.modal-video {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+
+/* ========================================= */
+/* PROJECT INFO (Unchanged)                  */
+/* ========================================= */
+
+.project-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    flex-grow: 1;
+}
+
+.project-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+}
+
+.project-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+/* Tags */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    padding: 0.3rem 0.8rem;
+    background-color: rgba(74, 222, 128, 0.1);
+    color: var(--accent);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+/* Meta */
+.project-meta {
+    display: flex;
+    gap: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+}
+
+.project-meta span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.project-meta i {
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+/* ========================================= */
+/* RESPONSIVE DESIGN                         */
+/* ========================================= */
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-header .page-title {
+        font-size: 2rem;
+    }
+
+    .project-video {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+
+    .video-modal-content {
+        width: 95vw;
+        border-radius: 16px;
+    }
+
+    .modal-video {
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-overlay {
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    .watch-demo {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .project-link {
+        padding: 0.4rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .video-close {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .project-preview,
+    .project-overlay,
+    .watch-demo,
+    .project-link,
+    .video-modal,
+    .video-modal-content,
+    .video-close,
+    .project-card {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .project-card:hover .project-preview {
+        transform: none;
+    }
+
+    .project-card:hover {
+        transform: none;
+    }
+}
